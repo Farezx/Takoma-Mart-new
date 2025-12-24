@@ -1,19 +1,17 @@
+// components/app-sidebar.tsx
 "use client"
 import * as React from "react"
 import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
+  Package,
+  ShoppingCart,
+  TrendingUp,
+  BarChart3,
+  Settings,
+  Home,
+  Users,
+  FileText,
 } from "lucide-react"
 import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
 import { TeamSwitcher } from "@/components/team-switcher"
 import {
@@ -23,135 +21,210 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
-// This is sample data.
+
+// Updated data for inventory management system
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: "Admin User",
+    email: "admin@inventory.com",
+    avatar: "/avatars/admin.jpg",
   },
   teams: [
     {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
+      name: "Inventory Pro",
+      logo: Package,
       plan: "Enterprise",
     },
     {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
+      name: "Store Front",
+      logo: ShoppingCart,
+      plan: "Business",
     },
     {
-      name: "Evil Corp.",
-      logo: Command,
+      name: "Warehouse",
+      logo: Home,
       plan: "Free",
     },
   ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
+      title: "Dashboard",
+      url: "/",
+      icon: BarChart3,
+      isActive: false,
+      items: [
+        {
+          title: "Overview",
+          url: "/",
+        },
+        {
+          title: "Analytics",
+          url: "/analytics",
+        },
+        {
+          title: "Reports",
+          url: "/reports",
+        },
+      ],
+    },
+    {
+      title: "Products",
+      url: "/products",
+      icon: Package,
       isActive: true,
       items: [
         {
+          title: "All Products",
+          url: "/products",
+        },
+        {
+          title: "Add New Product",
+          url: "/products/new",
+        },
+        {
+          title: "Categories",
+          url: "/products/categories",
+        },
+        {
+          title: "Low Stock",
+          url: "/products/low-stock",
+        },
+      ],
+    },
+    {
+      title: "Transactions",
+      url: "/transactions",
+      icon: TrendingUp,
+      items: [
+        {
+          title: "Purchases",
+          url: "/transactions/purchases",
+        },
+        {
+          title: "Sales",
+          url: "/transactions/sales",
+        },
+        {
+          title: "Returns",
+          url: "/transactions/returns",
+        },
+        {
           title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
+          url: "/transactions/history",
         },
       ],
     },
     {
-      title: "Models",
-      url: "#",
-      icon: Bot,
+      title: "Inventory",
+      url: "/inventory",
+      icon: ShoppingCart,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "Stock Levels",
+          url: "/inventory/stock",
         },
         {
-          title: "Explorer",
-          url: "#",
+          title: "Stock Alerts",
+          url: "/inventory/alerts",
         },
         {
-          title: "Quantum",
-          url: "#",
+          title: "Stock Report",
+          url: "/inventory/report",
+        },
+        {
+          title: "Inventory Audit",
+          url: "/inventory/audit",
         },
       ],
     },
     {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
+      title: "Suppliers",
+      url: "/suppliers",
+      icon: Users,
       items: [
         {
-          title: "Introduction",
-          url: "#",
+          title: "All Suppliers",
+          url: "/suppliers",
         },
         {
-          title: "Get Started",
-          url: "#",
+          title: "Add Supplier",
+          url: "/suppliers/new",
         },
         {
-          title: "Tutorials",
-          url: "#",
+          title: "Supplier Orders",
+          url: "/suppliers/orders",
+        },
+      ],
+    },
+    {
+      title: "Customers",
+      url: "/customers",
+      icon: Users,
+      items: [
+        {
+          title: "All Customers",
+          url: "/customers",
         },
         {
-          title: "Changelog",
-          url: "#",
+          title: "Add Customer",
+          url: "/customers/new",
+        },
+        {
+          title: "Orders",
+          url: "/customers/orders",
+        },
+      ],
+    },
+    {
+      title: "Reports",
+      url: "/reports",
+      icon: FileText,
+      items: [
+        {
+          title: "Sales Report",
+          url: "/reports/sales",
+        },
+        {
+          title: "Stock Report",
+          url: "/reports/stock",
+        },
+        {
+          title: "Profit & Loss",
+          url: "/reports/profit-loss",
+        },
+        {
+          title: "Export Data",
+          url: "/reports/export",
         },
       ],
     },
     {
       title: "Settings",
-      url: "#",
-      icon: Settings2,
+      url: "/settings",
+      icon: Settings,
       items: [
         {
           title: "General",
-          url: "#",
+          url: "/settings/general",
         },
         {
-          title: "Team",
-          url: "#",
+          title: "Users",
+          url: "/settings/users",
+        },
+        {
+          title: "Notifications",
+          url: "/settings/notifications",
         },
         {
           title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
+          url: "/settings/billing",
         },
       ],
     },
   ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
-  ],
+ 
 }
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
@@ -160,7 +233,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
