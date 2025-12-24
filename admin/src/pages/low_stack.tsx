@@ -1,9 +1,9 @@
 import React from 'react'
 
-const low_stack = () => {
+const LowStack = () => {
   return (
-    <div>low_stack</div>
+    <div>LowStack</div>
   )
 }
 
-export default low_stack
+export default LowStack
