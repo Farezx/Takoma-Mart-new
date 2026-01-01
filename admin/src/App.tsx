@@ -10,18 +10,22 @@ import LowStack from "./pages/low_stack"
 import Purchases from "./pages/purchases"
 import Sales from "./pages/sales"
 import Returns from "./pages/returns"
+import ProductDetail from "./pages/product_detail"
+import StockReportPage from "./pages/stock_report"
 
 const App = () => {
   return (
     <>
     <BrowserRouter>
       <Routes>
-         <Route path="/" element={ <Dashboard />}>
+        <Route path="/" element={ <Dashboard />}>
           <Route path="" element={<Overview/>} />
           <Route path="analytics" element={<Analytics/>} />
-          <Route path="reports" element={<Reports/>} />
+          <Route path="reports" element={<StockReportPage/>} />
           <Route path="products" element={<Products />} />
-          <Route path="products/new" element={<AddNewProduct/>} />
+          <Route path="product/:id" element={<ProductDetail />} />
+          <Route path="/products/add" element={<AddNewProduct />} />
+          <Route path="/products/edit/:id" element={<AddNewProduct />} />
           <Route path="products/categories" element={<div>Categories</div>} />
           <Route path="products/low-stock" element={<LowStack/>} />
           <Route path="transactions/purchases" element={<Purchases/>} />

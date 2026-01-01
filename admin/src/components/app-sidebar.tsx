@@ -10,6 +10,7 @@ import {
   Home,
   Users,
   FileText,
+  Command,
 } from "lucide-react"
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
@@ -79,7 +80,7 @@ const data = {
         },
         {
           title: "Add New Product",
-          url: "/products/new",
+          url: "/products/add",
         },
         {
           title: "Categories",
@@ -227,14 +228,25 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+    <Sidebar collapsible="icon" className="border-r-0 shadow-xl" {...props}>
+      <SidebarHeader className="p-4">
+        {/* Replaced standard switcher with a branded feel */}
+        <div className="flex items-center gap-3 px-2 py-3 mb-2 rounded-2xl bg-slate-50 border border-slate-100">
+          <div className="h-8 w-8 rounded-lg bg-slate-900 flex items-center justify-center text-white shrink-0">
+            <Command className="h-5 w-5" />
+          </div>
+          <div className="flex-1 overflow-hidden group-data-[collapsible=icon]:hidden">
+            <h2 className="text-sm font-bold text-slate-900 truncate">InventoryPro</h2>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Enterprise</p>
+          </div>
+        </div>
       </SidebarHeader>
-      <SidebarContent>
+      
+      <SidebarContent className="px-2">
         <NavMain items={data.navMain} />
       </SidebarContent>
-      <SidebarFooter>
+
+      <SidebarFooter className="p-4 bg-slate-50/50">
         <NavUser user={data.user} />
       </SidebarFooter>
       <SidebarRail />
